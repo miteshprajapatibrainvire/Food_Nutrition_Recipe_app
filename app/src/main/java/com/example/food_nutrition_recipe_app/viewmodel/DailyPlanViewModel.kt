@@ -22,6 +22,7 @@ class DailyPlanViewModel:
 
     fun getDailyPlan()
     {
+        //                android:text="atuny0"
         dailyPlanResult.value= BaseResponse.Loading()
         viewModelScope.launch(Dispatchers.IO) {
           try{

@@ -1,281 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.RegistrationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <ProgressBar
-       android:id="@+id/prgbarRegistration"
-       android:layout_width="48dp"
-       android:layout_height="48dp"
-       android:visibility="invisible"
-       android:translationZ="1dp"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"/>
+   <data>
+         <variable
+             name="viewModelRegister"
+             type="com.example.food_nutrition_recipe_app.viewmodel.AuthViewModel" />
+         <variable
+             name="handler"
+             type="com.example.food_nutrition_recipe_app.RegisterHandler" />
+      <variable
+          name="MaleData"
+          type="com.example.food_nutrition_recipe_app.RegisterHandler" />
+      <variable
+          name="FemaleData"
+             type="com.example.food_nutrition_recipe_app.RegisterHandler" />
+   </data>
 
-   <androidx.appcompat.widget.AppCompatImageView
-       android:src="@drawable/salad_demo"
-       android:scaleType="centerCrop"
+   <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+       android:layout_height="match_parent"
+       tools:context=".fragment.RegistrationFragment">
 
-   <androidx.core.widget.NestedScrollView
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       android:layout_margin="20dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
-   <com.google.android.material.card.MaterialCardView
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       android:layout_margin="5dp"
-       app:cardCornerRadius="8dp"
-       app:cardElevation="8dp"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
-   <LinearLayout
-       android:layout_margin="5dp"
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
-      <com.google.android.material.textview.MaterialTextView
-          android:text="Registration"
-          android:textColor="@color/black"
-          android:textSize="22sp"
-          android:layout_margin="4dp"
-          android:textAlignment="center"
-          android:textStyle="bold"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-
-      <com.google.android.material.textview.MaterialTextView
-          android:text="Create New Account"
-          android:textColor="@color/black"
-          android:textSize="16sp"
-          android:textAlignment="center"
-          android:layout_margin="4dp"
-          android:textStyle="bold"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/idtxFirstName"
-          android:layout_marginTop="4dp"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/edFirstName"
-             android:layout_width="match_parent"
-             android:hint="FirstName"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="textCapWords"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-   <com.google.android.material.textfield.TextInputLayout
-       android:id="@+id/idtxLastName"
-       android:layout_marginTop="4dp"
-       android:alpha="0.9"
-       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/edLastName"
-          android:hint="LastName"
-          android:lines="1"
-          android:layout_margin="4dp"
-          android:padding="15dp"
-          android:inputType="textCapWords"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-   </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/idtxMiddleName"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
+      <ProgressBar
+          android:id="@+id/prgbarRegistration"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:visibility="invisible"
+          android:translationZ="1dp"
+          app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/edMiddleName"
-             android:hint="MiddleName"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="textCapWords"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/idtxAge"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent" />
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:src="@drawable/salad_demo"
+          android:scaleType="centerCrop"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+      <androidx.core.widget.NestedScrollView
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/idAge"
-             android:hint="Age"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="number"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <LinearLayout
-          android:orientation="horizontal"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:layout_margin="20dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
 
-         <RadioGroup
-             android:id="@+id/radioGroupId"
-             android:gravity="center"
-             android:orientation="horizontal"
+         <com.google.android.material.card.MaterialCardView
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             android:layout_margin="5dp"
+             app:cardCornerRadius="8dp"
+             app:cardElevation="8dp"
+             app:layout_constraintBottom_toBottomOf="parent"
              android:layout_width="match_parent"
              android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/rbMale"
-                android:text="Male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/rbFemale"
-                android:text="Female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-         </RadioGroup>
+               <com.google.android.material.textview.MaterialTextView
+                   android:text="Registration"
+                   android:textColor="@color/black"
+                   android:textSize="22sp"
+                   android:layout_margin="4dp"
+                   android:textAlignment="center"
+                   android:textStyle="bold"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
 
-      </LinearLayout>
+               <com.google.android.material.textview.MaterialTextView
+                   android:text="Create New Account"
+                   android:textColor="@color/black"
+                   android:textSize="16sp"
+                   android:textAlignment="center"
+                   android:layout_margin="4dp"
+                   android:textStyle="bold"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/idtxEmail"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/idEmail"
-             android:hint="Email"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="textEmailAddress"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/txidPhone"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/idPhone"
-             android:hint="Phone"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="number"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/txidUsername"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/idtxFirstName"
+                   android:layout_marginTop="4dp"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
 
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/edUsername"
-             android:hint="Username"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="textCapWords"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edFirstName"
+                      android:layout_width="match_parent"
+                      android:hint="FirstName"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.firstname}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textCapWords"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/txidPassword"
-          android:layout_marginTop="4dp"
-          android:alpha="0.9"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/edPassword"
-             android:hint="Password"
-             android:lines="1"
-             android:layout_margin="4dp"
-             android:padding="15dp"
-             android:inputType="textCapWords"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-      </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/idtxLastName"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
 
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/registerId"
-          android:layout_gravity="center"
-          android:text="SingUp"
-          android:alpha="1"
-          android:layout_margin="6dp"
-          android:backgroundTint="@color/btnColor"
-          android:textColor="@color/black"
-          app:cornerRadius="40dp"
-          android:textStyle="bold"
-          android:textSize="14sp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edLastName"
+                      android:hint="LastName"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.lastname}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textCapWords"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
 
-   </LinearLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/idtxMiddleName"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
 
-</com.google.android.material.card.MaterialCardView>
-   </androidx.core.widget.NestedScrollView>
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edMiddleName"
+                      android:hint="MiddleName"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.middlename}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textCapWords"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/idtxAge"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/idAge"
+                      android:hint="Age"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.age}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="number"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <LinearLayout
+                   android:orientation="horizontal"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <RadioGroup
+                      android:id="@+id/radioGroupId"
+                      android:gravity="center"
+                      android:checkedButton="@+id/split_type_equal"
+                      android:orientation="horizontal"
+                      android:onCheckedChanged="@{viewModelRegister.onSplitTypeChanged}"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+
+                     <RadioButton
+                         android:id="@+id/rbMale"
+                         android:text="Male"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content" />
+
+                     <RadioButton
+                         android:id="@+id/rbFemale"
+                         android:text="Female"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content" />
+
+                  </RadioGroup>
+
+               </LinearLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/idtxEmail"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/idEmail"
+                      android:hint="Email"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.email}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textEmailAddress"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/txidPhone"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/idPhone"
+                      android:hint="Phone"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.phone}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="number"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/txidUsername"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edUsername"
+                      android:hint="Username"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.username}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textCapWords"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/txidPassword"
+                   android:layout_marginTop="4dp"
+                   android:alpha="0.9"
+
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                  <com.google.android.material.textfield.TextInputEditText
+                      android:id="@+id/edPassword"
+                      android:hint="Password"
+                      android:lines="1"
+                      android:text="@={viewModelRegister.password}"
+                      android:layout_margin="4dp"
+                      android:padding="15dp"
+                      android:inputType="textCapWords"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/registerId"
+                   android:layout_gravity="center"
+                   android:text="SingUp"
+                   android:alpha="1"
+                   android:onClick="@{()->viewModelRegister.performRegistrationValidation()}"
+                   android:layout_margin="6dp"
+                   android:backgroundTint="@color/btnColor"
+                   android:textColor="@color/black"
+                   app:cornerRadius="40dp"
+                   android:textStyle="bold"
+                   android:textSize="14sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+         </com.google.android.material.card.MaterialCardView>
+      </androidx.core.widget.NestedScrollView>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

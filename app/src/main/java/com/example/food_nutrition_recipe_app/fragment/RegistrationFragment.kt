@@ -8,24 +8,48 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.food_nutrition_recipe_app.R
+import com.example.food_nutrition_recipe_app.RegisterHandler
 import com.example.food_nutrition_recipe_app.databinding.FragmentRegistrationBinding
 import com.example.food_nutrition_recipe_app.model.BaseResponse
 import com.example.food_nutrition_recipe_app.network.NetworkUtils
 import com.example.food_nutrition_recipe_app.viewmodel.AuthViewModel
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(),RegisterHandler {
 
     lateinit var binding:FragmentRegistrationBinding
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-    private val viewModel by viewModels<AuthViewModel>()
+    lateinit var viewModel:AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
             binding= FragmentRegistrationBinding.inflate(inflater, container, false)
+            viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+
+            binding.viewModelRegister=viewModel
+            binding.handler = this
+            binding.lifecycleOwner=this
+
+            viewModel.getRegistrationResult().observe(requireActivity(), Observer { result ->
+                if(result=="valid credention")
+                {
+                    val radioBtn=view?.findViewById<RadioButton>(id)
+                    val radioText=radioBtn?.text.toString()
+                    viewModel.registerUser(binding.edFirstName.text.toString(),binding.edLastName.text.toString(),
+                        binding.edMiddleName.text.toString(),Integer.parseInt(binding.idAge.text.toString()),radioText,binding.idEmail.text.toString(),
+                        binding.idPhone.text.toString(),binding.edUsername.text.toString(),binding.edPassword.text.toString())
+                    Toast.makeText(requireContext(), "valid credential!", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Toast.makeText(requireActivity(), result.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
 
             binding.registerId.setOnClickListener {
                 if(NetworkUtils.isNetworkAvailable(requireContext())) {
@@ -36,6 +60,7 @@ class RegistrationFragment : Fragment() {
                     Toast.makeText(requireContext(), "Turn On Your Internet Connection!", Toast.LENGTH_SHORT).show()
                 }
             }
+
         if(NetworkUtils.isNetworkAvailable(requireContext())) {
             viewModel.registerResult.observe(viewLifecycleOwner)
             {
@@ -173,4 +198,9 @@ class RegistrationFragment : Fragment() {
             }
         }
     }
+
+    override fun registerOnClick() {
+        viewModel.performRegistrationValidation()
+    }
+
 }

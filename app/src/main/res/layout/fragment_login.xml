@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModelData"
+            type="com.example.food_nutrition_recipe_app.viewmodel.AuthViewModel" />
+
+        <variable
+            name="handler"
+            type="com.example.food_nutrition_recipe_app.LogInHandler" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.LoginFragment">
 
     <ProgressBar
@@ -59,12 +72,13 @@
             android:id="@+id/txusername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edUsername"
                 android:layout_width="match_parent"
-                android:text="atuny0"
+                android:text="@={viewModelData.username}"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:drawablePadding="10dp"
                 android:layout_margin="4dp"
@@ -83,34 +97,36 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edPassword"
-                android:text="9uQFF1Lh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="10dp"
-                android:lines="1"
-                android:layout_margin="4dp"
-                android:padding="15dp"
                 android:inputType="textPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:lines="1"
+                android:padding="15dp"
+                android:text="@={viewModelData.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginId"
-                android:layout_gravity="center"
-                android:text="SignIn"
-                android:alpha="1"
-                android:layout_margin="6dp"
-                android:backgroundTint="@color/btnColor"
-                android:textColor="@color/black"
-                app:cornerRadius="40dp"
-                android:textStyle="bold"
-                android:textSize="14sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_margin="6dp"
+                android:alpha="1"
+                android:backgroundTint="@color/btnColor"
+                android:onClick="@{()->viewModelData.performLoginValidation()}"
+                android:text="SignIn"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="40dp" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

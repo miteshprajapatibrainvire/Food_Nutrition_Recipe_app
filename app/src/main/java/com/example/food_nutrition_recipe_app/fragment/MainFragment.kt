@@ -20,11 +20,13 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding=FragmentMainBinding.inflate(inflater,container,false)
 
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
         }
+
         binding.btnRegistration.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_registrationFragment)
         }

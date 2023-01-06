@@ -7,59 +7,118 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.food_nutrition_recipe_app.LogInHandler
 import com.example.food_nutrition_recipe_app.databinding.FragmentLoginBinding
 import com.example.food_nutrition_recipe_app.model.BaseResponse
 import com.example.food_nutrition_recipe_app.model.LoginResponse
-import com.example.food_nutrition_recipe_app.network.NetworkUtils
 import com.example.food_nutrition_recipe_app.viewmodel.AuthViewModel
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LogInHandler {
 
     lateinit var binding: FragmentLoginBinding
     var dataSession:String="sessionData"
-    private val viewModel by viewModels<AuthViewModel>()
+//    private val viewModel by viewModels<AuthViewModel>()
+    lateinit var  viewModel:AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        binding.loginId.setOnClickListener {
-            if(NetworkUtils.isNetworkAvailable(requireContext())) {
-                validation()
+        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+
+//        binding.loginId.setOnClickListener {
+//            if(NetworkUtils.isNetworkAvailable(requireContext())) {
+//                validation()
+//            }
+//            else
+//            {
+//                Toast.makeText(requireContext(), "Turn On Your Internet Connection!", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//       viewModel = ViewModelProviders.of(this).get(LogInViewModel::class.java)
+
+            binding.viewModelData=viewModel
+            binding.lifecycleOwner=this
+            binding.handler = this
+
+        viewModel.getLogInResult().observe(requireActivity(), Observer { result ->
+            if(result=="valid credention") {
+                Toast.makeText(requireContext(), "valid credential!", Toast.LENGTH_SHORT).show()
             }
             else
             {
-                Toast.makeText(requireContext(), "Turn On Your Internet Connection!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), result.toString(), Toast.LENGTH_SHORT).show()
             }
-        }
+        })
 
 
-            viewModel.loginResult.observe(requireActivity())
-            {
-                when (it) {
-                    is BaseResponse.Success -> {
-                        Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
-                            .show()
-                        processLogin(it.data)
-                        stopLoading()
-                    }
-                    is BaseResponse.Loading -> {
-                        showLoading()
-                    }
-                    is BaseResponse.Error -> {
-                        stopLoading()
-                        Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-                    }
+        viewModel.loginResult.observe(requireActivity(),{
+            when (it) {
+                is BaseResponse.Success -> {
+                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    processLogin(it.data)
+                    stopLoading()
+                }
+                is BaseResponse.Loading -> {
+                    showLoading()
+                }
+                is BaseResponse.Error -> {
+                    stopLoading()
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+
                 }
             }
+        })
 
+//        viewModel.loginResult.observe(requireActivity())
+//        {
+//            when (it) {
+//                is BaseResponse.Success -> {
+//                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
+//                        .show()
+//                    processLogin(it.data)
+//                    stopLoading()
+//                }
+//                is BaseResponse.Loading -> {
+//                    showLoading()
+//                }
+//                is BaseResponse.Error -> {
+//                    stopLoading()
+//                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//                else -> {
+//
+//                }
+//            }
+//        }
+//            viewModel.loginResult.observe(requireActivity())
+//            {
+//                when (it) {
+//                    is BaseResponse.Success -> {
+//                        Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
+//                            .show()
+//                        processLogin(it.data)
+//                        stopLoading()
+//                    }
+//                    is BaseResponse.Loading -> {
+//                        showLoading()
+//                    }
+//                    is BaseResponse.Error -> {
+//                        stopLoading()
+//                        Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+//                    }
+//                    else -> {
+//                    }
+//                }
+//            }
 
         return binding.root
     }
@@ -113,6 +172,10 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onLogInClicked() {
+        viewModel.performLoginValidation()
     }
 
 }
